@@ -26,6 +26,9 @@ from services import resources
 
 # --------------------------------------------------
 # Read Config Data
+#
+# NEVER HARD-CODE CONFIG DATA!
+# ALWAYS READ IT FROM FILES OR INPUTS!
 # --------------------------------------------------
 
 CONFIG = config.read_json_config()
@@ -38,6 +41,17 @@ BASE_URL = CONFIG['base_url']
 
 @pytest.mark.parametrize("url_ending", ['', '/'])
 def test_api_product(url_ending):
+    """
+    This test verifies the list of products returned by the resource path.
+    However, it deliberately does NOT validate specific values.
+    Given the limited nature of this example, test data cannot be controlled.
+    For a real test, it would be best to set up the system with specific test data.
+    Since that is not possible, it is better verify data formats than data values.
+    That makes the test far less fragile.
+    Furthermore, this test makes sure the list is non-empty and that IDs are unique
+        (which should be reasonable preconditions for the test's intent).
+    """
+
     resource = resources.api_product()
     response = requests.get(BASE_URL + resource + url_ending)
     assertions.verify_response_basics(response)
@@ -57,6 +71,13 @@ def test_api_product(url_ending):
 
 @pytest.mark.parametrize("url_ending", ['', '/'])
 def test_api_product_id_exists(url_ending):
+    """
+    This test verifies the retrieval of a single product by ID.
+    Unlike the list test, this test is written to validate specific values.
+    A test like this should be preceded by a setup operation to create the record.
+    In that case, it would be appropriate to verify the actual values.
+    """
+
     resource = resources.api_product_id(1)
     response = requests.get(BASE_URL + resource + url_ending)
     assertions.verify_response_basics(response)
@@ -69,6 +90,11 @@ def test_api_product_id_exists(url_ending):
 
 
 def test_api_product_id_dne():
+    """
+    This test verifies than an error is given when attempting to retrieve
+        a product via an invalid ID.
+    """
+
     resource = resources.api_product_id(99999)
     response = requests.get(BASE_URL + resource)
     assertions.verify_response_basics(response, status_code=500)
