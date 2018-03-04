@@ -37,9 +37,9 @@ Run `pytest -h` to see more options.
 The Tests
 ---------
 
-All tests should be written in Python modules named "test_*.py" under the `tests` directory.
+All tests should be written in Python modules named "test_\*.py" under the `tests` directory.
 (Note that this is a directory and not a Python package; hence, no `__init__.py` file.)
-Pytest will "discover" any functions named "test_*" as test cases.
+Pytest will "discover" any functions named "test_\*" as test cases.
 Each Python module should contain tests for one API set.
 For example, `tests/test_api_product.py` contains tests for the `/api/product` resource paths.
 
