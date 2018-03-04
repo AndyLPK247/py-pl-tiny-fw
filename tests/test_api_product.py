@@ -22,6 +22,13 @@ import requests
 
 
 # --------------------------------------------------
+# "Constants"
+# --------------------------------------------------
+
+BASE_URL = "http://pltestautomationsample.azurewebsites.net"
+
+
+# --------------------------------------------------
 # Tests for /api/product
 # --------------------------------------------------
 
@@ -33,10 +40,28 @@ def test_api_product():
 # Tests for /api/product/<id>
 # --------------------------------------------------
 
-def test_api_product_id_exists():
-    pass
+@pytest.mark.parametrize("url_ending", ['', '/'])
+def test_api_product_id_exists(url_ending):
+    response = requests.get(BASE_URL + '/api/product/1' + url_ending)
+    assert response.status_code == 200
+    assert response.encoding == 'utf-8'
+
+    content = response.json()
+    assert len(content) == 3
+    assert 'Description' in content
+    assert content['Description'] == 'A blue car'
+    assert 'Id' in content
+    assert content['Id'] == 1
+    assert 'Name' in content
+    assert content['Name'] == 'Blue Car'
 
 
 def test_api_product_id_dne():
-    pass
+    response = requests.get(BASE_URL + '/api/product/99999')
+    assert response.status_code == 500
+    assert response.encoding == 'utf-8'
 
+    content = response.json()
+    assert len(content) == 1
+    assert 'Message' in content
+    assert content['Message'] == 'An error has occurred.'
