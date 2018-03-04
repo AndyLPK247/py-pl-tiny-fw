@@ -21,6 +21,7 @@ import pytest
 import requests
 
 from fw import assertions
+from services import resources
 
 
 # --------------------------------------------------
@@ -36,7 +37,8 @@ BASE_URL = "http://pltestautomationsample.azurewebsites.net"
 
 @pytest.mark.parametrize("url_ending", ['', '/'])
 def test_api_product(url_ending):
-    response = requests.get(BASE_URL + '/api/product' + url_ending)
+    resource = resources.api_product()
+    response = requests.get(BASE_URL + resource + url_ending)
     assertions.verify_response_basics(response)
 
     content = response.json()
@@ -54,7 +56,8 @@ def test_api_product(url_ending):
 
 @pytest.mark.parametrize("url_ending", ['', '/'])
 def test_api_product_id_exists(url_ending):
-    response = requests.get(BASE_URL + '/api/product/1' + url_ending)
+    resource = resources.api_product_id(1)
+    response = requests.get(BASE_URL + resource + url_ending)
     assertions.verify_response_basics(response)
 
     product = response.json()
@@ -65,7 +68,8 @@ def test_api_product_id_exists(url_ending):
 
 
 def test_api_product_id_dne():
-    response = requests.get(BASE_URL + '/api/product/99999')
+    resource = resources.api_product_id(99999)
+    response = requests.get(BASE_URL + resource)
     assertions.verify_response_basics(response, status_code=500)
 
     content = response.json()

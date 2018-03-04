@@ -25,7 +25,7 @@ Then, run `python -m pytest` to discover and run all tests.
 
 Considerations
 --------------
-* No 'service objects' - too small to be worthwhile.
+* No 'service objects' - too small to be worthwhile, but service package.
 * Slash or no slash? Doubles the runtime, but may be necessary to check
   a few at least.
 * It would be best to have setup and cleanup populate dummy data.
