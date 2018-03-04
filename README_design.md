@@ -167,7 +167,7 @@ which may become too much in the future.
 Two ways to address that problem would be
 (1) pick-and-choose only a few endpoints to check, or
 (2) add a boolean option to the config data to run all tests with or without the slash.
-(I strongly oppose making the slash's appearance random-50/50 because function tests should be deterministic.)
+(I strongly oppose making the slash's appearance random-50/50 because functional tests should be deterministic.)
 
 The third challenge was the Accept format: JSON or XML?
 JSON is much easier to handle in Python, but XML is nevertheless available.
@@ -185,6 +185,7 @@ Thus, rather than bloat testing at the service layer,
 it would be better to do only a few spot checks for alternative accept formats.
 To me, this is less of a risk than the trailing slash
 because accept formats use the same endpoint URL while trailing slashes technically use different URLs.
+Furthermore, the trailing slash can only be genuinely tested as an integration point and not at the unit level.
 A boolean config data option to select accept format type for all tests could also be added,
 but that would require additional service package logic to parse formats generically,
 and I consider that beyond the scope of this project.
