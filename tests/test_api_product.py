@@ -34,10 +34,18 @@ BASE_URL = "http://pltestautomationsample.azurewebsites.net"
 # Tests for /api/product
 # --------------------------------------------------
 
-# @pytest.mark.parametrize("url_ending", ['', '/'])
-# def test_api_product(url_ending):
-#     response = requests.get(BASE_URL + '/api/product' + url_ending)
-#     assertions.verify_response_basics(response)
+@pytest.mark.parametrize("url_ending", ['', '/'])
+def test_api_product(url_ending):
+    response = requests.get(BASE_URL + '/api/product' + url_ending)
+    assertions.verify_response_basics(response)
+
+    content = response.json()
+    ids = []
+    assert len(content) > 0
+    for product in content:
+        assertions.verify_product_format(product)
+        assert product['Id'] not in ids
+        ids.append(product['Id'])
 
 
 # --------------------------------------------------
@@ -49,11 +57,11 @@ def test_api_product_id_exists(url_ending):
     response = requests.get(BASE_URL + '/api/product/1' + url_ending)
     assertions.verify_response_basics(response)
 
-    content = response.json()
-    assertions.verify_product_format(content)
-    assert content['Description'] == 'A blue car'
-    assert content['Id'] == 1
-    assert content['Name'] == 'Blue Car'
+    product = response.json()
+    assertions.verify_product_format(product)
+    assert product['Description'] == 'A blue car'
+    assert product['Id'] == 1
+    assert product['Name'] == 'Blue Car'
 
 
 def test_api_product_id_dne():
