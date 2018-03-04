@@ -8,6 +8,7 @@ Although its scope is small, it is designed to be expandable.
 
 APIs Under Test
 ---------------
+
 http://pltestautomationsample.azurewebsites.net/api/product
 
 The main endpoint returns a list of products.
