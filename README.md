@@ -19,10 +19,8 @@ Only GET methods are available.
 Running Tests
 -------------
 
-To run these tests, make sure Python 3 is installed.
-Also, run `pip install pytest` and `pip install requests`.
-It is recommended (but not necessary) to run tests in a virtual Python environment.
-Then, run `python -m pytest` to discover and run all tests.
+Tests require Python 3, `pytest`, and `requests`.
+Run `python -m pytest` from the root directory to discover and run all tests.
 
 
 Further Documentation
