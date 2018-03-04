@@ -14,7 +14,7 @@ from fw import assertions, config
 # --------------------------------------------------
 # Session-Scoped Fixtures
 #
-# These will run once before all tests.
+# These will run once before all tests that need it.
 # --------------------------------------------------
 
 @pytest.fixture(scope="session")
