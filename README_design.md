@@ -53,7 +53,7 @@ At the top level, I chose READMEs in Markdown so that they can be diff-ed line-b
 but still have some formatting.
 I always comment my Python files with headers and docstrings.
 
-The code took me about 2 hours 45 minutes from start to finish to design, implement, and test.
+The code took me about 3 hours total to design, implement, and test.
 The documentation took me about 2 additional hours.
 I could have done it quicker if I skipped the config data support.
 
