@@ -23,6 +23,14 @@ Tests require Python 3, `pytest`, and `requests`.
 Run `python -m pytest` from the root directory to discover and run all tests.
 
 
+Directory Layout
+----------------
+
+* `fw` contains automation framework support code (like custom assertions)
+* `services` contains service call support code
+* `tests` contains the test cases and fixtures
+
+
 Further Documentation
 ---------------------
 
