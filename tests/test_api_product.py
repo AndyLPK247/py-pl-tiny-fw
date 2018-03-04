@@ -20,15 +20,16 @@ For simplicity, the tests are functions and not classes.
 import pytest
 import requests
 
-from fw import assertions
+from fw import assertions, config
 from services import resources
 
 
 # --------------------------------------------------
-# "Constants"
+# Read Config Data
 # --------------------------------------------------
 
-BASE_URL = "http://pltestautomationsample.azurewebsites.net"
+CONFIG = config.read_json_config()
+BASE_URL = CONFIG['base_url']
 
 
 # --------------------------------------------------

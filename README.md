@@ -41,7 +41,5 @@ Considerations
 
 TODO
 ----
-* Move resource paths to a constants file.
-* Move base URL to a config file.
 * Add comments to tests.
 * Write the two docs.
