@@ -104,3 +104,6 @@ ENV/
 .vscode
 .idea
 *.iml
+
+# Test Cache
+.pytest_cache
