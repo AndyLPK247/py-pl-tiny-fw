@@ -1,8 +1,9 @@
 py-pl-tiny-fw
 =============
 
-This is a small test framework written in Python.
-Those who know will know what it's about.
+This is a small example test framework written in Python.
+It tests a very simple REST API for two GET methods.
+Although its scope is small, it is designed to be expandable.
 
 
 APIs Under Test
@@ -23,6 +24,16 @@ It is recommended (but not necessary) to run tests in a virtual Python environme
 Then, run `python -m pytest` to discover and run all tests.
 
 
+Further Documentation
+---------------------
+
+If you are a developer who will will add tests to this suite as new features are added,
+Then please read the `README_dev.md` file.
+
+If you would like an overview of the framework (including approach, design, packages, and tools),
+Then please read the `README_design.md` file.
+
+
 Considerations
 --------------
 * No 'service objects' - too small to be worthwhile, but service package.
@@ -37,8 +48,3 @@ Considerations
 * Separate packages for tests and framework.
 * A service test should contain request spec, method call, and response
   validation all in one, because that is the fullness of the behavior.
-
-
-TODO
-----
-* Write the two docs.
