@@ -41,5 +41,4 @@ Considerations
 
 TODO
 ----
-* Add comments to tests.
 * Write the two docs.
