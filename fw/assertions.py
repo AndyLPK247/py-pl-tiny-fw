@@ -9,19 +9,15 @@ Otherwise, be prepared for peculiar failures/aborts during tests
 # Custom Assertion Functions
 # --------------------------------------------------
 
-def verify_response_basics(response, status_code=200, encoding='utf-8'):
+def verify_config_data(data):
     """
-    Verifies that the response was basically as expected.
-    This should not be the only assertion performed.
-    Other checks may be added in the future if they are shared by all calls.
-    :param response: from requests
-    :param status_code: expected status code (default: 200)
-    :param encoding: expected encoding (default: utf-8)
+    Verifies that the config data contains required values.
+    This should be updated as the framework grows.
+    :param data: dict
     :return: None
     """
 
-    assert response.status_code == status_code
-    assert response.encoding == encoding
+    verify_exact_keys(data, ['base_url'])
 
 
 def verify_exact_keys(dictionary, key_set):
@@ -50,3 +46,18 @@ def verify_product_format(product):
     assert isinstance(product['Description'], str)
     assert isinstance(product['Id'], int)
     assert isinstance(product['Name'], str)
+
+
+def verify_response_basics(response, status_code=200, encoding='utf-8'):
+    """
+    Verifies that the response was basically as expected.
+    This should not be the only assertion performed.
+    Other checks may be added in the future if they are shared by all calls.
+    :param response: from requests
+    :param status_code: expected status code (default: 200)
+    :param encoding: expected encoding (default: utf-8)
+    :return: None
+    """
+
+    assert response.status_code == status_code
+    assert response.encoding == encoding

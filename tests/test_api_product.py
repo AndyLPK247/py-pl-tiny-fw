@@ -20,19 +20,8 @@ For simplicity, the tests are functions and not classes.
 import pytest
 import requests
 
-from fw import assertions, config
+from fw import assertions
 from services import resources
-
-
-# --------------------------------------------------
-# Read Config Data
-#
-# NEVER HARD-CODE CONFIG DATA!
-# ALWAYS READ IT FROM FILES OR INPUTS!
-# --------------------------------------------------
-
-CONFIG = config.read_json_config()
-BASE_URL = CONFIG['base_url']
 
 
 # --------------------------------------------------
@@ -40,7 +29,7 @@ BASE_URL = CONFIG['base_url']
 # --------------------------------------------------
 
 @pytest.mark.parametrize("url_ending", ['', '/'])
-def test_api_product(url_ending):
+def test_api_product(config_data, url_ending):
     """
     This test verifies the list of products returned by the resource path.
     However, it deliberately does NOT validate specific values.
@@ -53,7 +42,7 @@ def test_api_product(url_ending):
     """
 
     resource = resources.api_product()
-    response = requests.get(BASE_URL + resource + url_ending)
+    response = requests.get(config_data['base_url'] + resource + url_ending)
     assertions.verify_response_basics(response)
 
     content = response.json()
@@ -70,7 +59,7 @@ def test_api_product(url_ending):
 # --------------------------------------------------
 
 @pytest.mark.parametrize("url_ending", ['', '/'])
-def test_api_product_id_exists(url_ending):
+def test_api_product_id_exists(config_data, url_ending):
     """
     This test verifies the retrieval of a single product by ID.
     Unlike the list test, this test is written to validate specific values.
@@ -79,7 +68,7 @@ def test_api_product_id_exists(url_ending):
     """
 
     resource = resources.api_product_id(1)
-    response = requests.get(BASE_URL + resource + url_ending)
+    response = requests.get(config_data['base_url'] + resource + url_ending)
     assertions.verify_response_basics(response)
 
     product = response.json()
@@ -89,14 +78,14 @@ def test_api_product_id_exists(url_ending):
     assert product['Name'] == 'Blue Car'
 
 
-def test_api_product_id_dne():
+def test_api_product_id_dne(config_data):
     """
     This test verifies than an error is given when attempting to retrieve
         a product via an invalid ID.
     """
 
     resource = resources.api_product_id(99999)
-    response = requests.get(BASE_URL + resource)
+    response = requests.get(config_data['base_url'] + resource)
     assertions.verify_response_basics(response, status_code=500)
 
     content = response.json()
