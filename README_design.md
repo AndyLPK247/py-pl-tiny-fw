@@ -137,6 +137,8 @@ Some tests may need additional calls for setup and cleanup,
 but those should not be the main behavior for the test case's focus.
 Thus, each test should be unique for an endpoint and its equivalence class of inputs.
 Each test also reuses common framework parts.
+I included a negative test for a bad ID to make sure it gets a reasonable error message,
+but I chose not to include a negative test for resource path misspelling because, to me, that would add little value.
 
 The first challenge was considering how to handle the test data.
 The trouble here was mostly due to inherent assignment limitations.
