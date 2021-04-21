@@ -1,7 +1,8 @@
 py-pl-tiny-fw
 =============
 
-This is a small example test framework written in Python.
+I developed this project for my interview at PrecisionLender in March 2018.
+It is a small example test framework written in Python.
 It tests a very simple REST API for two GET methods.
 Although its scope is small, it is designed to be expandable.
 
